@@ -104,11 +104,17 @@ async function route() {
   const [h, arg] = location.hash.slice(2).split("/");
   if (["rentals", "damage", "admin", "book"].includes(h) && !user) {
     toast("Please sign in first", 1);
-    location.hash = "#/login";
+    history.replaceState(null, "", "#/login");
+    nav();
+    login();
+    window.scrollTo(0, 0);
     return;
   }
   if (h == "admin" && user.role != "admin") {
-    location.hash = "#/";
+    history.replaceState(null, "", "#/");
+    nav();
+    browse();
+    window.scrollTo(0, 0);
     return;
   }
   nav();
@@ -163,7 +169,118 @@ function register() {
 let F = { q: "", category: "All", maxPrice: 6000, from: "", to: "" };
 async function browse() {
   app.innerHTML = `<section class="hero"><h1>Rent the right car, in minutes</h1><div class="bar">${field("f_from", "Pick-up date", "date", F.from, 'min="' + today() + '"')}${field("f_to", "Return date", "date", F.to, 'min="' + today() + '"')}${field("f_q", "Search", "text", F.q, 'placeholder="Search by model"')}</div></section>
-  <div class="wrap"><aside class="card side"><b>Category</b><div style="margin-top:8px">${["All", "Hatchback", "Sedan", "SUV", "MPV", "Electric"].map((c) => `<span class="chip ${c == F.category ? "on" : ""}" data-c="${c}">${c}</span>`).join("")}</div><label style="margin-top:12px">Max price per day: <b id="pv">${money(F.maxPrice)}</b><input type="range" id="f_p" min="1000" max="6000" step="100" value="${F.maxPrice}" style="width:100%"></label></aside><div><p><b id="cnt"></b></p><div class="grid" id="cars"></div></div></div>`;
+  <div class="wrap"><aside class="card side"><b>Category</b><div style="margin-top:8px">${["All", "Hatchback", "Sedan", "SUV", "MPV", "Electric"].map((c) => `<span class="chip ${c == F.category ? "on" : ""}" data-c="${c}">${c}</span>`).join("")}</div><label style="margin-top:12px">Max price per day: <b id="pv">${money(F.maxPrice)}</b><input type="range" id="f_p" min="1000" max="6000" step="100" value="${F.maxPrice}" style="width:100%"></label></aside><div><p><b id="cnt"></b></p><div class="grid" id="cars"></div></div></div>
+  <footer class="browse-footer">
+    <section class="footer-chapter footer-story">
+      <div class="footer-content footer-story-grid">
+        <div class="footer-about reveal">
+          <p class="footer-eyebrow">DRIVEEASE INDIA</p>
+          <a class="footer-logo" href="#/">Drive<i>Ease</i></a>
+          <h2>More than a ride.<br>A simpler way to move.</h2>
+          <p class="footer-description">From quick city errands to long-awaited family trips, DriveEase brings a dependable car closer to every plan—with transparent prices and a booking experience designed around you.</p>
+          <div class="footer-points">
+            <span>✓ Inspected fleet</span>
+            <span>✓ Clear pricing</span>
+            <span>✓ Real-time availability</span>
+          </div>
+        </div>
+        <div class="footer-stats reveal">
+          <div><strong>6+</strong><span>Vehicle choices</span></div>
+          <div><strong>5%</strong><span>Transparent tax</span></div>
+          <div><strong>3</strong><span>Flexible payment options</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-chapter footer-process">
+      <div class="footer-content">
+        <div class="footer-section-head reveal">
+          <div><p class="footer-eyebrow">HOW IT WORKS</p><h2>From search to the road</h2></div>
+          <p>Three simple steps. One smooth journey.</p>
+        </div>
+        <div class="footer-steps">
+          <article class="reveal"><span class="step-number">01</span><div class="step-icon">⌕</div><h3>Find your car</h3><p>Search by model, body style or budget to discover the vehicle that fits your trip.</p><button type="button" class="footer-link-button footer-action-link" data-explore-fleet>Explore the fleet →</button></article>
+          <article class="reveal"><span class="step-number">02</span><div class="step-icon">◷</div><h3>Choose your dates</h3><p>Select pickup and return dates to check live availability and get an accurate rental total.</p><button type="button" class="footer-link-button footer-action-link" data-check-dates>Check availability →</button></article>
+          <article class="reveal"><span class="step-number">03</span><div class="step-icon">✓</div><h3>Reserve securely</h3><p>Add helpful extras, choose a payment method and receive your reservation confirmation.</p><a href="#/rentals">Track your rental →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-chapter footer-services">
+      <div class="footer-content footer-services-grid">
+        <div class="footer-service-copy reveal">
+          <p class="footer-eyebrow">BUILT AROUND YOUR JOURNEY</p>
+          <h2>Choose how you travel</h2>
+          <p>Daily drives, weekend escapes or passenger-heavy family plans—browse a range of vehicle categories with pricing you can understand before you reserve.</p>
+          <button type="button" class="footer-cta" data-browse-top>Browse available cars <span>→</span></button>
+        </div>
+        <div class="footer-service-list reveal">
+          <div><span>01</span><strong>Everyday hatchbacks</strong><p>Easy to park and economical for city travel.</p></div>
+          <div><span>02</span><strong>Comfortable sedans</strong><p>Balanced space for daily work and longer routes.</p></div>
+          <div><span>03</span><strong>Spacious SUVs & MPVs</strong><p>Flexible room for families, luggage and group trips.</p></div>
+          <div><span>04</span><strong>Electric options</strong><p>A quieter alternative for your next planned journey.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-chapter footer-navigation">
+      <div class="footer-content footer-links-grid">
+        <div class="footer-brand-block reveal">
+          <a class="footer-logo" href="#/">Drive<i>Ease</i></a>
+          <p>The right car for the moment—searched, reserved and managed in one place.</p>
+        </div>
+        <nav class="footer-link-column reveal" aria-label="Explore DriveEase">
+          <p class="footer-eyebrow">EXPLORE</p>
+          <button type="button" class="footer-link-button" data-browse-top>Browse vehicles</button>
+          <a href="#/rentals">My rentals</a>
+          <a href="#/damage">Report damage</a>
+        </nav>
+        <div class="footer-link-column reveal">
+          <p class="footer-eyebrow">DRIVE WITH CONFIDENCE</p>
+          <span>Transparent totals</span>
+          <span>Flexible add-ons</span>
+          <span>Rental status tracking</span>
+          <span>Dedicated support</span>
+        </div>
+        <div class="footer-contact reveal">
+          <p class="footer-eyebrow">NEED HELP?</p>
+          <a href="mailto:support@driveease.com">support@driveease.com</a>
+          <p>We are ready to help you plan a smoother journey.</p>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>© ${new Date().getFullYear()} DriveEase. Built for convenient travel.</p><button type="button" class="back-to-top" id="backToTop">Back to top ↑</button></div>
+    </section>
+  </footer>`;
+  const revealObserver = "IntersectionObserver" in window
+    ? new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      }), { threshold: 0.12 })
+    : null;
+  if (revealObserver) document.querySelectorAll(".browse-footer .reveal").forEach((el) => revealObserver.observe(el));
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  $("#backToTop").onclick = scrollToTop;
+  document.querySelectorAll("[data-browse-top]").forEach((button) => {
+    button.onclick = () => {
+      if (location.hash !== "#/" && location.hash !== "") {
+        location.hash = "#/";
+      }
+      scrollToTop();
+    };
+  });
+  document.querySelectorAll("[data-explore-fleet]").forEach((button) => {
+    button.onclick = () => {
+      scrollToTop();
+      setTimeout(() => $("#f_q")?.focus({ preventScroll: true }), 350);
+    };
+  });
+  document.querySelectorAll("[data-check-dates]").forEach((button) => {
+    button.onclick = () => {
+      scrollToTop();
+      setTimeout(() => $("#f_from")?.focus({ preventScroll: true }), 350);
+    };
+  });
   const load = async () => {
     const vs = await api(
       "/vehicles?" +
