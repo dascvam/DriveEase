@@ -81,7 +81,7 @@ npm install
 npm start
 ```
 
-4. Open **http://localhost:3000** in a browser.
+4. Open **https://driveease-w8u7.onrender.com** in a browser.
 
 The server creates `data.json` with sample vehicles and an administrator account when no data file exists.
 
