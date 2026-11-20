@@ -1,0 +1,95 @@
+{
+  "seq": 104,
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "email": "admin@driveease.com",
+      "pass": "$2a$08$ODLMxhxV9y3ULoiinbHhYeDW6yLcbUQmRgxs3klZ2nSTEMSiekP5K",
+      "role": "admin"
+    },
+    {
+      "id": 101,
+      "name": "Shivam",
+      "email": "dascvam@gmail.com",
+      "pass": "$2a$08$f6D4QKMiDpG4b1j/XRfQ7uwJpg2TmTu.Ux4bkq46t7XjmbNchS5Li",
+      "role": "customer",
+      "phone": "7808801970",
+      "licence": "789-41-453-7896"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": 2,
+      "name": "Maruti Swift",
+      "category": "Hatchback",
+      "rate": 1800,
+      "plate": "PB 08 CD 5678",
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "name": "Toyota Innova",
+      "category": "MPV",
+      "rate": 4500,
+      "plate": "PB 10 EF 9012",
+      "status": "Available"
+    },
+    {
+      "id": 4,
+      "name": "Honda City",
+      "category": "Sedan",
+      "rate": 2800,
+      "plate": "PB 10 GH 3456",
+      "status": "Available"
+    },
+    {
+      "id": 5,
+      "name": "Tata Nexon EV",
+      "category": "Electric",
+      "rate": 3500,
+      "plate": "PB 11 JK 7890",
+      "status": "Available"
+    },
+    {
+      "id": 6,
+      "name": "Mahindra Thar",
+      "category": "SUV",
+      "rate": 4000,
+      "plate": "PB 11 LM 2468",
+      "status": "Available"
+    },
+    {
+      "id": 104,
+      "name": "toyota innova",
+      "category": "MPV",
+      "rate": 222,
+      "plate": "PB 09 BH 1569",
+      "status": "Available",
+      "image": "/uploads/vehicle-1795151490461-40908378.png"
+    }
+  ],
+  "reservations": [
+    {
+      "id": 102,
+      "userId": 101,
+      "vehicleId": 2,
+      "from": "2026-11-21",
+      "to": "2026-11-26",
+      "days": 5,
+      "addons": [
+        "GPS"
+      ],
+      "total": 9765,
+      "status": "Cancelled",
+      "payment": {
+        "method": "upi",
+        "status": "Paid",
+        "txn": "TXN-1795011684568"
+      },
+      "created": "2026-11-18T14:21:24.568Z",
+      "code": "DE-2102"
+    }
+  ],
+  "damage": []
+}

@@ -1,0 +1,15 @@
+{
+  "name": "driveease",
+  "version": "1.0.0",
+  "description": "DriveEase - Car Rental Management Platform (college project)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.22.3",
+    "express-session": "^1.18.0",
+    "multer": "^2.5.0"
+  }
+}
